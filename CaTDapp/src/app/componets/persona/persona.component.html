@@ -1,0 +1,85 @@
+
+
+    <div class="row justify-content-md-center">
+      <div class="col col-3">
+        <div class="card">
+          <div class="card-header bg-secondary">
+              <h5 class="card-title" style="color: white;">Register Persona</h5>
+          </div>
+          <div class="card-body"> 
+              <div class="form-group">
+                 
+                  <input type="text" name="nombre" class="form-control" placeholder="nombres" [(ngModel)]="personaModel.nombres">
+                  <br>
+                  <input type="text" name="idrol" class="form-control" placeholder="apellidos" [(ngModel)]="personaModel.apellidos">
+                  <br>
+                  <input type="text" name="idrol" class="form-control" placeholder="telefono"  [(ngModel)]="personaModel.telefono">
+              </div>
+              <div class="form-group">
+                  <button class="btn btn-secondary" style="width: 100%;" (click)="save()">Register</button>
+              </div>           
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <table class="table">
+          <thead class="table-light">
+            <tr>
+                <th scope="col"></th>
+              <th scope="col">NOMBRES</th>
+              <th scope="col">APELLIDOS</th>
+              <th scope="col">TELEFONO</th>
+              <th scope="col" >ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lista of personas; let i=index" >
+              <th scope="row">{{i+1}}</th>
+              <td>{{lista.nombres}}</td>
+              <td>{{lista.apellidos}}</td>
+              <td>{{lista.telefono}}</td>
+            
+              <td>
+                <button type="button" class="btn btn-outline-danger" ><i class="fa fa-trash" aria-hidden="true"></i></button >
+                <button type="button" class="btn btn-outline-secondary" data-toggle='modal' data-target='#modal1' (click)="createU(lista.idpersona)"
+                 ><i class="fa fa-user-plus" aria-hidden="true"></i></button >    
+              </td>
+            </tr>          
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+
+
+
+
+  <div class="container" > 
+    <div class="modal" tabindex="-1" id="modal1" >
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #5a5a5a;">
+              <h4 class="modal-title" style="color:rgb(255, 255, 255); "> Create User</h4>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="col-md-12">
+                      <label for="inputEmail4" class="form-label">Username:</label>
+                      <input type="text" class="form-control" id="inputEmail4" [(ngModel)]="userModel.username">
+                    </div>
+                   
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">Password:</label>
+                      <input type="password" class="form-control" id="inputAddress" [(ngModel)]="userModel.password" >
+                    </div>                    
+              <br>
+            </div>
+            <div class="modal-footer" >
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="savU()" >Save </button>
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+    

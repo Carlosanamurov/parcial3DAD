@@ -1,0 +1,108 @@
+<div class="col-md-3" *ngFor=" let user of usuarios">
+    <div class="card text-center" style="font-size: 12px;">
+     
+      <div class="card-body ">
+        <button data-toggle='modal'  data-target='#modal2' class="btn" (click)="capture(user.idusuario)"
+         style="background-color: rgba(130, 130, 130, 0.33); color: #fff; display: flex; justify-content:flex-start;" >
+          <i class="fa fa-plus-square" aria-hidden="true"></i>
+         </button>
+        <img [src]="user.url == null ? '/assets/img2.png' : user.url " alt="..." class="card-img-top rounded-circle  " alt="Cinque Terre" width="200" height="180">
+        <label for="text-center" >Username</label>
+        <p style="color: rgb(123, 123, 123);">{{user.username}}</p>
+        <label for="text-center">Nombre y Apellido</label>
+        <p style="color: rgb(123, 123, 123);">{{user.nombres}}  {{user.apellidos}}</p>
+        <a  data-toggle='modal' data-target='#modal1' class="btn btn-info btn-block" (click)="dato(user.idusuario,user.username)">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+
+        </a>
+      </div>
+    </div>
+</div>
+
+<div class="container" > 
+  <div class="modal" tabindex="-1" id="modal2" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #5a5a5a;">
+            <h4 class="modal-title" style="color:rgb(255, 255, 255); "> <i class="fa fa-cloud" aria-hidden="true"></i>
+            </h4>
+          </div>
+          <div class="modal-body">
+                   
+            
+            <div class="form-group">  
+              <input type="file" accept=".png, jpg" (change)="onUpload($event)" class="form-control" placeholder="file">
+            </div>
+            <div class="progress"> 
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+              [style.width]="(uploadPercent | async) + '%' ">  
+              </div>
+            </div>
+            <div class="form-group">
+              <input  #imageUser type="hidden" [value]="urlImage | async" >
+              
+            </div>      
+                            
+            <br>
+          </div>
+          <div class="modal-footer" >
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           
+            <button *ngIf="urlImage | async; else btnDisable"
+            type="button" class="btn btn-primary" type="submit" (click)="savArchi()" ><i class="fa fa-cloud" aria-hidden="true"></i>
+            </button>
+            <ng-template #btnDisable>
+              <button type="button" class="btn btn-secondary" type="submit" disabled="true"   ><i class="fa fa-cloud" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" > 
+  <div class="modal" tabindex="-1" id="modal1" >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #5a5a5a;">
+            <h4 class="modal-title" style="color:rgb(255, 255, 255); ">  <i class="fa fa-envelope" aria-hidden="true"></i></h4>
+          </div>
+          <div class="modal-body">
+             <div class="col-md-12">
+              <label for="inputEmail4" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="inputEmail4" value="{{correos.destinario}}" disabled>
+            </div>
+              
+                  <div class="col-md-12">
+                    <label for="inputEmail4" class="form-label">Titulo:</label>
+                    <input type="text" class="form-control" id="inputEmail4" [(ngModel)]="correos.titulo">
+                  </div>
+                 
+                  <div class="col-12">
+                    <label for="inputAddress" class="form-label">Mensaje:</label>
+                    <textarea type="password" class="form-control" id="inputAddress" [(ngModel)]="correos.mensaje" ></textarea>
+                  </div>      
+                            
+            <br>
+          </div>
+          <div class="modal-footer" >
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="sendMail()" ><i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
